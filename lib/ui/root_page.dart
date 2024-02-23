@@ -1,8 +1,10 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:pusl_3119/ui/screens/diseases_page.dart';
 import 'package:pusl_3119/ui/screens/home_page.dart';
 import 'package:pusl_3119/ui/screens/profile_page.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:pusl_3119/ui/screens/scan_page.dart';
 
 import '../constants.dart';
 import 'login_page.dart';
@@ -29,6 +31,7 @@ class _RootPageState extends State<RootPage> {
     Icons.home,
     Icons.shopping_cart,
     Icons.person,
+    Icons.shopping_cart,
   ];
 
   //List of theh pages titles
@@ -36,6 +39,7 @@ class _RootPageState extends State<RootPage> {
     'Home',
     'Diseases',
     'Profile',
+    'Cart',
   ];
 
 
@@ -63,11 +67,26 @@ class _RootPageState extends State<RootPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, PageTransition(child: const Login(), type: PageTransitionType.bottomToTop));
+          Navigator.push(context, PageTransition(child: const ScanPage(), type: PageTransitionType.bottomToTop));
+        },
+        child: Image.asset('assets/images/2nd_icon.png', height: 38.0,),
+        backgroundColor: Constants.primaryColor,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        splashColor: Constants.primaryColor,
+        activeColor: Constants.primaryColor,
+        inactiveColor: Colors.black.withOpacity(.5),
+        icons: iconList,
+        activeIndex: _bottomNavIndex,
+        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.softEdge,
+        onTap: (index){
+          setState(() {
+            _bottomNavIndex = index;
+          });
         },
       ),
-
-
 
 
     );
