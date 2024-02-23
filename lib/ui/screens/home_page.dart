@@ -10,24 +10,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int selectedIndex = 0;
+
+  List<Plant> _plantList = Plant.plantList;
+  List<String> _plantTypes = [
+    'Recommended',
+    'Vegetable',
+    'Fruits',
+    'Grains',
+    'Seeds',
+  ];
+
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = 0;
     Size size = MediaQuery.of(context).size;
-
-    List<Plant> _plantList = Plant.plantList;
-
-    //plant category
-    List<String> _plantTypes = [
-      'Recommended',
-      'Vegetable',
-      'Fruits',
-      'Grains',
-      'Seeds',
-    ];
-
-
-
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -45,34 +41,64 @@ class _HomePageState extends State<HomePage> {
                     ),
                     width: size.width * .9,
                     child: Row(
-                       crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.search, color: Colors.black54.withOpacity(.6),),
-                        const Expanded(child: TextField(
-                          showCursor: false,
-                          decoration: InputDecoration(
-                            hintText: 'Search Disease',
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
+                        const Expanded(
+                          child: TextField(
+                            showCursor: false,
+                            decoration: InputDecoration(
+                              hintText: 'Search Disease',
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                            ),
                           ),
-                        )),
-                        Icon(Icons.mic,color: Colors.black54.withOpacity(.6),),
+                        ),
+                        Icon(Icons.mic,color: Colors.black54.withOpacity(.5),),
                       ],
                     ),
                     decoration: BoxDecoration(
                       color: Constants.primaryColor.withOpacity(.1),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                  )
-
-
+                  ),
                 ],
               ),
-            )
+            ),
+            SizedBox(height: 20), // Add some space between search bar and plant types list
+            Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: _plantTypes.map((plantType) {
+                    int index = _plantTypes.indexOf(plantType);
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = index;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          plantType,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: selectedIndex == index? FontWeight.bold : FontWeight.w300,
+                            color: selectedIndex == index? Constants.primaryColor : Constants.blackColor,
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
           ],
         ),
-      )
+      ),
     );
   }
 }
