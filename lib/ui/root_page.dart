@@ -1,5 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:pusl_3119/ui/screens/cart_page.dart';
 import 'package:pusl_3119/ui/screens/diseases_page.dart';
 import 'package:pusl_3119/ui/screens/home_page.dart';
 import 'package:pusl_3119/ui/screens/profile_page.dart';
@@ -24,6 +25,7 @@ class _RootPageState extends State<RootPage> {
     HomePage(),
     DiseasesPage(),
     ProfilePage(),
+    CartPage(),
   ];
 
   //List of the pages icons
