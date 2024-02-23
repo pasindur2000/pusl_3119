@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pusl_3119/constants.dart';
+import 'package:pusl_3119/ui/root_page.dart';
 
 import 'login_page.dart';
 
@@ -27,7 +28,7 @@ class _onboardingScreenState extends State<OnboardingScreen> {
               padding: const EdgeInsets.only(right: 20, top: 20),
               child: InkWell(
                 onTap: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const Login()));//to login screen
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const RootPage()));//to login screen
                 },
                 child: const Text('Skip', style: TextStyle(
                   color: Color(0xff296e48),
@@ -89,7 +90,7 @@ class _onboardingScreenState extends State<OnboardingScreen> {
                           _pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.easeIn);
                         }
                       }else{
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const Login()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const RootPage()));
                       }
                     });
                   },
