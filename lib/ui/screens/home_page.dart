@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pusl_3119/constants.dart';
 import 'package:pusl_3119/models/plants.dart';
 
 class HomePage extends StatefulWidget {
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16.0,
                     ),
-                    width: size.width * .8,
+                    width: size.width * .9,
                     child: Row(
                        crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -51,14 +52,21 @@ class _HomePageState extends State<HomePage> {
                         const Expanded(child: TextField(
                           showCursor: false,
                           decoration: InputDecoration(
-                            hintText: 'Search',
+                            hintText: 'Search Disease',
                             border: InputBorder.none,
                             focusedBorder: InputBorder.none,
                           ),
-                        ))
+                        )),
+                        Icon(Icons.mic,color: Colors.black54.withOpacity(.6),),
                       ],
                     ),
+                    decoration: BoxDecoration(
+                      color: Constants.primaryColor.withOpacity(.1),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   )
+
+
                 ],
               ),
             )
