@@ -122,10 +122,18 @@ class _HomePageState extends State<HomePage> {
                           iconSize: 30,
                         ),
                         decoration: BoxDecoration(
-
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
                         ),
                       ),
-                    )
+                    ),
+                    Positioned(
+                      left: 50,
+                      right: 50,
+                      top: 50,
+                      bottom: 50,
+                      child: Image.asset('assets/images/1st.png'),
+                    ),
                   ],
                 ),
               );
