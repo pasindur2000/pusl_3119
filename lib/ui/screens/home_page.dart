@@ -1,6 +1,8 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:pusl_3119/constants.dart';
 import 'package:pusl_3119/models/plants.dart';
 
@@ -182,7 +184,14 @@ class _HomePageState extends State<HomePage> {
 
               }
               ),
-            )
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 16, bottom: 20, top: 20),
+              child: const Text('New Diseases', style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18.0,
+              ),),
+            ),
 
           ],
         ),
