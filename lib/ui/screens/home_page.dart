@@ -113,7 +113,17 @@ class _HomePageState extends State<HomePage> {
                       top: 10,
                       right: 20,
                       child: Container(
+                         height: 50,
+                        width: 50,
+                        child: IconButton(
+                          onPressed: null,
+                          icon: Icon(_plantList[index].isFavorated == true ? Icons.favorite : Icons.favorite_border),
+                          color: Constants.primaryColor,
+                          iconSize: 30,
+                        ),
+                        decoration: BoxDecoration(
 
+                        ),
                       ),
                     )
                   ],
