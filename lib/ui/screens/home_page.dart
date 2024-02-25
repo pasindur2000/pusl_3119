@@ -192,7 +192,31 @@ class _HomePageState extends State<HomePage> {
                 fontSize: 18.0,
               ),),
             ),
-
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              height: size.height * .5,
+              child: ListView.builder(
+                itemCount: _plantList.length,
+                scrollDirection: Axis.vertical,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (BuildContext context, int index){
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Constants.primaryColor.withOpacity(.1),
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    height: 80.0,
+                    padding: const EdgeInsets.only(left: 10, top: 10),
+                    margin: const EdgeInsets.only(bottom: 10, top: 10),
+                    width: size.width,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                    ),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
