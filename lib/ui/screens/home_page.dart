@@ -66,36 +66,65 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(height: 20), // Add some space between search bar and plant types list
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: _plantTypes.map((plantType) {
-                    int index = _plantTypes.indexOf(plantType);
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedIndex = index;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              height: 50.0,
+              width: size.width,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _plantTypes.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedIndex = index;
+                          });
+                        },
                         child: Text(
-                          plantType,
+                          _plantTypes[index],
                           style: TextStyle(
                             fontSize: 16.0,
-                            fontWeight: selectedIndex == index? FontWeight.bold : FontWeight.w300,
-                            color: selectedIndex == index? Constants.primaryColor : Constants.blackColor,
+                            fontWeight: selectedIndex == index
+                                ? FontWeight.bold
+                                : FontWeight.w300,
+                            color: selectedIndex == index
+                                ? Constants.primaryColor
+                                : Constants.blackColor,
                           ),
                         ),
                       ),
                     );
-                  }).toList(),
-                ),
-              ),
+                  }),
             ),
+            SizedBox(
+              height: size.height * .3,
+              child: ListView.builder(
+                itemCount: _plantList.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index){
+              return Container(
+                width: 300,
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: 10,
+                      right: 20,
+                      child: Container(
+
+                      ),
+                    )
+                  ],
+                ),
+              );
+
+
+              }
+              ),
+            )
+
           ],
         ),
       ),
