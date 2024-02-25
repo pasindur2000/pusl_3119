@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:pusl_3119/constants.dart';
 import 'package:pusl_3119/models/plants.dart';
@@ -105,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index){
               return Container(
-                width: 300,
+                width: 200,
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: Stack(
                   children: [
@@ -134,8 +136,47 @@ class _HomePageState extends State<HomePage> {
                       bottom: 50,
                       child: Image.asset('assets/images/1st.png'),
                     ),
+                    Positioned(
+                      bottom: 15,
+                      left: 20,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(_plantList[index].category,
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 16,
+                          ),),
+                          Text(_plantList[index].plantName, style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 15,
+                      right: 20,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(r'$' + _plantList[index].price.toString() , style: TextStyle(
+                          color: Constants.primaryColor,
+                          fontSize: 16
+                        ),),
+                      ),
+                    )
                   ],
                 ),
+                decoration: BoxDecoration(
+                  color: Constants.primaryColor.withOpacity(.8),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+
               );
 
 
