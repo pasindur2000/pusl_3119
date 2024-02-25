@@ -212,6 +212,31 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Container(
+                              width: 60.0,
+                              height: 60.0,
+                              decoration: BoxDecoration(
+                                color: Constants.primaryColor.withOpacity(.8),
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 5,
+                              left: 0,
+                              right: 0,
+                              child: SizedBox(
+                                height: 80.0,
+                                child: Image.asset('assets/images/1st.png'),
+                              ),
+                            ),
+
+                          ],
+                        )
+                      ],
                     ),
                   );
                 },
