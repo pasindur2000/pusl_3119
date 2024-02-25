@@ -233,8 +233,30 @@ class _HomePageState extends State<HomePage> {
                                 child: Image.asset('assets/images/1st.png'),
                               ),
                             ),
-
+                            Positioned(
+                              bottom: 5,
+                              left: 80,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(_plantList[index].category),
+                                  Text(_plantList[index].plantName, style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Constants.blackColor,
+                                  ),),
+                                ],
+                              ),
+                            ),
                           ],
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: Text(r'$' + _plantList[index].price.toString(), style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                            color: Constants.primaryColor,
+                          ),),
                         )
                       ],
                     ),
