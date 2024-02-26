@@ -10,6 +10,9 @@ class ScanPage extends StatefulWidget {
 }
 
 class _ScanPageState extends State<ScanPage> {
+  final ImagePicker _picker = ImagePicker();
+  List<XFile>? _imageFileList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
