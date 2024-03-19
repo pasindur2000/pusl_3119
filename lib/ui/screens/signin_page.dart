@@ -1,19 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pusl_3119/constants.dart';
+import 'package:pusl_3119/ui/root_page.dart';
+import 'package:pusl_3119/ui/screens/forgot_password.dart';
+import 'package:pusl_3119/ui/screens/signup_page.dart';
 import 'package:pusl_3119/ui/screens/widgets/custom_textfield.dart';
-import 'package:pusl_3119/ui/screens/signin_page.dart';
 
-import '../root_page.dart';
-
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignIn extends StatefulWidget {
+  const SignIn({Key? key}) : super(key: key);
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignIn> createState() => _LoginState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _LoginState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -26,9 +28,9 @@ class _SignUpState extends State<SignUp> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset('assets/images/signup.png'),
+              Image.asset('assets/images/signin.png'),
               const Text(
-                'Sign Up',
+                'Sign In',
                 style: TextStyle(
                   fontSize: 35.0,
                   fontWeight: FontWeight.w700,
@@ -43,11 +45,6 @@ class _SignUpState extends State<SignUp> {
                 icon: Icons.alternate_email,
               ),
               const CustomTextfield(
-                obscureText: false,
-                hintText: 'Enter Full Name',
-                icon: Icons.person,
-              ),
-              const CustomTextfield(
                 obscureText: true,
                 hintText: 'Enter Password',
                 icon: Icons.lock,
@@ -56,7 +53,13 @@ class _SignUpState extends State<SignUp> {
                 height: 10,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushReplacement(
+                      context,
+                      PageTransition(
+                          child: const RootPage(),
+                          type: PageTransitionType.bottomToTop));
+                },
                 child: Container(
                   width: size.width,
                   decoration: BoxDecoration(
@@ -67,13 +70,41 @@ class _SignUpState extends State<SignUp> {
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                   child: const Center(
                     child: Text(
-                      'Sign Up',
+                      'Sign In',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18.0,
                       ),
                     ),
                   ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(
+                      context,
+                      PageTransition(
+                          child: const ForgotPassword(),
+                          type: PageTransitionType.bottomToTop));
+                },
+                child: Center(
+                  child: Text.rich(TextSpan(children: [
+                    TextSpan(
+                      text: 'Forgot Password?',
+                      style: TextStyle(
+                        color: Constants.blackColor,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Reset Here',
+                      style: TextStyle(
+                        color: Constants.primaryColor,
+                      ),
+                    ),
+                  ])),
                 ),
               ),
               const SizedBox(
@@ -106,7 +137,7 @@ class _SignUpState extends State<SignUp> {
                       child: Image.asset('assets/images/google.png'),
                     ),
                     Text(
-                      'Sign Up with Google',
+                      'Sign In with Google',
                       style: TextStyle(
                         color: Constants.blackColor,
                         fontSize: 18.0,
@@ -123,19 +154,19 @@ class _SignUpState extends State<SignUp> {
                   Navigator.pushReplacement(
                       context,
                       PageTransition(
-                          child: const SignIn(),
+                          child: const SignUp(),
                           type: PageTransitionType.bottomToTop));
                 },
                 child: Center(
                   child: Text.rich(TextSpan(children: [
                     TextSpan(
-                      text: 'Have an Account?',
+                      text: 'New to Disector?',
                       style: TextStyle(
                         color: Constants.blackColor,
                       ),
                     ),
                     TextSpan(
-                      text: 'Login',
+                      text: 'Register',
                       style: TextStyle(
                         color: Constants.primaryColor,
                       ),

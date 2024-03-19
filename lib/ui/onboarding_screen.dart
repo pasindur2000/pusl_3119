@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pusl_3119/constants.dart';
 
 
-import 'signin_page.dart';
+import 'screens/signin_page.dart';
 
 
 class OnboardingScreen extends StatefulWidget {
