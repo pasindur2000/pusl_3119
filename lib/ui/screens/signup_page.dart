@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pusl_3119/constants.dart';
 import 'package:pusl_3119/ui/screens/widgets/custom_textfield.dart';
+import 'package:pusl_3119/ui/signin_page.dart';
 
 import '../root_page.dart';
 
@@ -24,9 +25,9 @@ class _SignUpState extends State<SignUp> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset('assets/images/signin.png'),
+            Image.asset('assets/images/signup.png'),
             const Text(
-              'Sign In',
+              'Sign Up',
               style: TextStyle(
                 fontSize: 35.0,
                 fontWeight: FontWeight.w700,
@@ -39,6 +40,11 @@ class _SignUpState extends State<SignUp> {
               obscureText: false,
               hintText: 'Enter Email',
               icon: Icons.alternate_email,
+            ),
+            const CustomTextfield(
+              obscureText: false,
+              hintText: 'Enter Full Name',
+              icon: Icons.person,
             ),
             const CustomTextfield(
               obscureText: true,
@@ -75,34 +81,7 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushReplacement(
-                    context,
-                    PageTransition(
-                        child: const RootPage(),
-                        type: PageTransitionType.bottomToTop));
-              },
-              child: Center(
-                child: Text.rich(TextSpan(children: [
-                  TextSpan(
-                    text: 'Forgot Password?',
-                    style: TextStyle(
-                      color: Constants.blackColor,
-                    ),
-                  ),
-                  TextSpan(
-                    text: 'Reset Here',
-                    style: TextStyle(
-                      color: Constants.primaryColor,
-                    ),
-                  ),
-                ])),
-              ),
-            ),
+
             const SizedBox(
               height: 20,
             ),
@@ -133,7 +112,7 @@ class _SignUpState extends State<SignUp> {
                     child: Image.asset('assets/images/google.png'),
                   ),
                   Text(
-                    'Sign In with Google',
+                    'Sign Up with Google',
                     style: TextStyle(
                       color: Constants.blackColor,
                       fontSize: 18.0,
@@ -150,19 +129,19 @@ class _SignUpState extends State<SignUp> {
                 Navigator.pushReplacement(
                     context,
                     PageTransition(
-                        child: const SignUp(),
+                        child: const SignIn(),
                         type: PageTransitionType.bottomToTop));
               },
               child: Center(
                 child: Text.rich(TextSpan(children: [
                   TextSpan(
-                    text: 'New to Disector?',
+                    text: 'Have an Account?',
                     style: TextStyle(
                       color: Constants.blackColor,
                     ),
                   ),
                   TextSpan(
-                    text: 'Register',
+                    text: 'Login',
                     style: TextStyle(
                       color: Constants.primaryColor,
                     ),
