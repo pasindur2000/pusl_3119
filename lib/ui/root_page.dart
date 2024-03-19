@@ -8,7 +8,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:pusl_3119/ui/screens/scan_page.dart';
 
 import '../constants.dart';
-import 'login_page.dart';
+import 'signin_page.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);

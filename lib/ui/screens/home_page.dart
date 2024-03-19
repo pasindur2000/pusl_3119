@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Text(r'$' + _plantList[index].price.toString() , style: TextStyle(
+                        child: Text( _plantList[index].price.toString() , style: TextStyle(
                           color: Constants.primaryColor,
                           fontSize: 16
                         ),),
@@ -252,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Container(
                           padding: const EdgeInsets.only(right: 10),
-                          child: Text(r'$' + _plantList[index].price.toString(), style: TextStyle(
+                          child: Text(_plantList[index].price.toString(), style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18.0,
                             color: Constants.primaryColor,
