@@ -88,38 +88,61 @@ class _LoginState extends State<SignIn> {
                         type: PageTransitionType.bottomToTop));
               },
               child: Center(
-                child: Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Forgot Password?',
-                          style:  TextStyle(
-                            color: Constants.blackColor,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Reset Here',
-                          style:  TextStyle(
-                            color: Constants.primaryColor,
-                          ),
-                        ),
-                      ]
-                    )
-                ),
+                child: Text.rich(TextSpan(children: [
+                  TextSpan(
+                    text: 'Forgot Password?',
+                    style: TextStyle(
+                      color: Constants.blackColor,
+                    ),
+                  ),
+                  TextSpan(
+                    text: 'Reset Here',
+                    style: TextStyle(
+                      color: Constants.primaryColor,
+                    ),
+                  ),
+                ])),
               ),
             ),
             const SizedBox(
               height: 20,
             ),
             Row(
-              children: const[
+              children: const [
                 Expanded(child: Divider()),
-                Padding(padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Text('OR'),),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text('OR'),
+                ),
                 Expanded(child: Divider()),
               ],
             ),
-
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: size.width,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Constants.primaryColor),
+                  borderRadius: BorderRadius.circular(10)),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    height: 30,
+                    child: Image.asset('assets/images/google.png'),
+                  ),
+                  Text(
+                    'Sign In with Google',
+                    style: TextStyle(
+                      color: Constants.blackColor,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
