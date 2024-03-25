@@ -5,7 +5,7 @@ import 'package:pusl_3119/ui/screens/diseases_page.dart';
 import 'package:pusl_3119/ui/screens/home_page.dart';
 import 'package:pusl_3119/ui/screens/profile_page.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:pusl_3119/ui/screens/scan_page.dart';
+import 'package:pusl_3119/scan_page.dart';
 
 import '../constants.dart';
 import 'screens/signin_page.dart';

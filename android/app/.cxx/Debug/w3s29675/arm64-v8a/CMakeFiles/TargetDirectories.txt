@@ -1,0 +1,3 @@
+D:/NSBM/Year 3/pusl_3119/android/app/.cxx/Debug/w3s29675/arm64-v8a/CMakeFiles/OpenCV_ffi.dir
+D:/NSBM/Year 3/pusl_3119/android/app/.cxx/Debug/w3s29675/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/NSBM/Year 3/pusl_3119/android/app/.cxx/Debug/w3s29675/arm64-v8a/CMakeFiles/rebuild_cache.dir

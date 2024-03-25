@@ -1,0 +1,7 @@
+[
+{
+  "directory": "D:/NSBM/Year 3/pusl_3119/android/app/.cxx/Debug/w3s29675/x86",
+  "command": "C:\\Users\\Pasidu\\AppData\\Local\\Android\\Sdk\\ndk\\26.2.11394342\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=i686-none-linux-android21 --sysroot=C:/Users/Pasidu/AppData/Local/Android/Sdk/ndk/26.2.11394342/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DOpenCV_ffi_EXPORTS -I\"D:/NSBM/Year 3/pusl_3119/android/cmake/include\" -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -frtti -fexceptions -std=c++17 -fno-limit-debug-info  -fPIC -o CMakeFiles\\OpenCV_ffi.dir\\D_\\NSBM\\Year_3\\pusl_3119\\lib\\opencv-cpp\\main.cpp.o -c \"D:\\NSBM\\Year 3\\pusl_3119\\lib\\opencv-cpp\\main.cpp\"",
+  "file": "D:\\NSBM\\Year 3\\pusl_3119\\lib\\opencv-cpp\\main.cpp"
+}
+]
