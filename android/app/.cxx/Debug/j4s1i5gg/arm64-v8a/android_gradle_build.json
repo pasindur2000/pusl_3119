@@ -1,0 +1,40 @@
+{
+  "buildFiles": [
+    "F:\\AndroidStudioProjects\\pano1\\android\\cmake\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\Pasidu\\AppData\\Local\\Android\\sdk\\cmake\\3.18.1\\bin\\ninja.exe",
+      "-C",
+      "F:\\AndroidStudioProjects\\pano1\\android\\app\\.cxx\\Debug\\j4s1i5gg\\arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\Pasidu\\AppData\\Local\\Android\\sdk\\cmake\\3.18.1\\bin\\ninja.exe",
+    "-C",
+    "F:\\AndroidStudioProjects\\pano1\\android\\app\\.cxx\\Debug\\j4s1i5gg\\arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "OpenCV_ffi::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "OpenCV_ffi",
+      "output": "F:\\AndroidStudioProjects\\pano1\\build\\app\\intermediates\\cxx\\Debug\\j4s1i5gg\\obj\\arm64-v8a\\libOpenCV_ffi.so",
+      "runtimeFiles": [
+        "F:\\AndroidStudioProjects\\pano1\\android\\cmake\\src\\jniLibs\\arm64-v8a\\libopencv_java4.so"
+      ]
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "C:\\Users\\Pasidu\\AppData\\Local\\Android\\Sdk\\ndk\\26.2.11394342\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "C:\\Users\\Pasidu\\AppData\\Local\\Android\\Sdk\\ndk\\26.2.11394342\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

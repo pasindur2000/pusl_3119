@@ -1,0 +1,3 @@
+F:/AndroidStudioProjects/pano1/android/app/.cxx/Debug/j4s1i5gg/arm64-v8a/CMakeFiles/OpenCV_ffi.dir
+F:/AndroidStudioProjects/pano1/android/app/.cxx/Debug/j4s1i5gg/arm64-v8a/CMakeFiles/edit_cache.dir
+F:/AndroidStudioProjects/pano1/android/app/.cxx/Debug/j4s1i5gg/arm64-v8a/CMakeFiles/rebuild_cache.dir
