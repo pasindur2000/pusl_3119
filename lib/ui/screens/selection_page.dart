@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pano1/constants.dart';
 import 'package:pano1/ui/onboarding_screen.dart';
+import 'package:pano1/scan_page.dart';
 
 class SelectPage extends StatefulWidget {
   const SelectPage({Key? key}) : super(key: key);
@@ -15,6 +16,14 @@ class _SelectPageState extends State<SelectPage> {
     return Scaffold(
       body: Stack(
         children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/bg.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           Positioned(
             top: 50,
             left: 20,
@@ -31,14 +40,55 @@ class _SelectPageState extends State<SelectPage> {
                     width: 40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: Constants.primaryColor.withOpacity(.15),
+                      color: Colors.white.withOpacity(.6),
                     ),
                     child: Icon(Icons.arrow_back_outlined,color: Constants.primaryColor,),
                   ),
-                )
+                ),
+              ],
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: (){},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white.withOpacity(0.6), // Change this value to adjust the opacity
+                    minimumSize: const Size(200, 50), // Change these values to adjust the size
+                  ),
+                  child: const Text(
+                    'LEAVES DISEASES',
+                    style: TextStyle(
+                      color: Color(0xff296e48),
+                        fontSize: 20
+                    ), ),
+                ),
+                const SizedBox(height: 40), // Change this value to adjust the space
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const PanoramaScreen()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white.withOpacity(0.6), // Change this value to adjust the opacity
+                    minimumSize: const Size(200, 50), // Change these values to adjust the size
+                  ),
+                  child: const Text(
+                    'TUMOR DISEASES',
+                    style: TextStyle(
+                        color: Color(0xff296e48),
+                        fontSize: 20
+                    ),  // Change this value to adjust the font size
+                  ),
+                ),
               ],
             ),
           )
+
         ],
       ),
 

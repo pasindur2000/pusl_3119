@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'constants.dart';
 import 'model_page.dart';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
@@ -94,13 +95,34 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Panorama Screen'),
-      ),
-      body: Center(
-        child: Column(
+      body: Stack(
+        children: [ Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Positioned(
+              top: 50,
+              left: 20,
+              right: 20,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Colors.white.withOpacity(.6),
+                      ),
+                      child: Icon(Icons.arrow_back_outlined,color: Constants.primaryColor,),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             ElevatedButton(
               onPressed: _pickImages,
               child: const Text('Select Images'),
@@ -117,6 +139,7 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
           ],
 
         ),
+      ],
       ),
     );
   }
