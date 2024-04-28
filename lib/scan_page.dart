@@ -2,6 +2,8 @@ import 'dart:ffi';
 import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -44,13 +46,14 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
   final _imagesStitch = ImagesStitch();
   final ImagePicker _picker = ImagePicker();
   String? _imagePathToShow = null;
+  bool _panoramaCreated = false;
 
   Future<void> _uploadImage() async{
-    if(_imagePathToShow != null) {
+    if(_imagePathToShow != null && _panoramaCreated) {
       File file = File(_imagePathToShow!);
       try {
         // Initialize Firebase Storage with your bucket
-        FirebaseStorage storage = FirebaseStorage.instanceFor(bucket: 'gs://disector-33450.appspot.com');
+        FirebaseStorage storage = FirebaseStorage.instanceFor(bucket: 'gs://disectornew.appspot.com');
 
         // Create a reference to the location you want to upload to in Firebase Storage
         Reference storageReference = storage.ref('uploads/${basename(file.path)}');
@@ -59,11 +62,29 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
         await storageReference.putFile(file);
 
         // Success!
-        print('Image uploaded successfully');
+        if (kDebugMode) {
+          print('Image uploaded successfully');
+        }
+        setState(() {
+          _panoramaCreated = false;
+        });
+        ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+          const SnackBar(content: Text('Panorama created and uploaded successfully')),
+        );
       } catch (e) {
         // If any error occurs
-        print(e);
+        if (kDebugMode) {
+          print(e);
+        }
       }
+    } else if(_imagePathToShow != null && !_panoramaCreated) {
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+        const SnackBar(content: Text('Panorama not created yet')),
+      );
+    } else {
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+        const SnackBar(content: Text('No image selected')),
+      );
     }
   }
 
@@ -77,69 +98,104 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
           imagePaths, dirPath, false, (stitchedImagesPath) {
         setState(() {
           _imagePathToShow = dirPath;
+          _panoramaCreated = true;
         });
+        ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+          const SnackBar(content: Text('Panorama created successfully')),
+        );
       });
     }
   }
-
-  Future<void> _goNext() async {
-    // Navigate to the ModelPage
-    Navigator.push(
-      context as BuildContext, // Pass the BuildContext from the current widget
-      MaterialPageRoute(builder: (context) => ModelPage()),
-    );
-  }
-
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: [ Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Positioned(
-              top: 50,
-              left: 20,
-              right: 20,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Colors.white.withOpacity(.6),
-                      ),
-                      child: Icon(Icons.arrow_back_outlined,color: Constants.primaryColor,),
+        children: [
+          Positioned(
+            top: 50,
+            left: 20,
+            right: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Constants.primaryColor.withOpacity(.15),
                     ),
+                    child: Icon(Icons.arrow_back_outlined, color: Constants.primaryColor,),
                   ),
-                ],
+                ),
+                GestureDetector(
+                  onTap: _uploadImage,
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Constants.primaryColor.withOpacity(.15),
+                    ),
+                    child: Icon(Icons.file_upload_outlined, color: Constants.primaryColor,),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(40.0), // Increased padding
+              child: ElevatedButton(
+                onPressed: _pickImages,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white.withOpacity(0.6), // Change this value to adjust the opacity
+                ),
+                child: const Text(
+                  'Select Images',
+                  style: TextStyle(
+                      color: Color(0xff296e48),
+                      fontSize: 20
+                  ),
+                ),
               ),
             ),
-            ElevatedButton(
-              onPressed: _pickImages,
-              child: const Text('Select Images'),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.all(40.0), // Increased padding
+              child: ElevatedButton(
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ModelPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white.withOpacity(0.6), // Change this value to adjust the opacity
+                ),
+                child: const Text(
+                  'Next',
+                  style: TextStyle(
+                      color: Color(0xff296e48),
+                      fontSize: 20
+                  ),  // Change this value to adjust the font size
+                ),
+              ),
             ),
-            if (_imagePathToShow != null) Image.file(File(_imagePathToShow!)),
-            ElevatedButton(
-              onPressed: _uploadImage,
-              child: const Text('Upload'),
-            ),
-            ElevatedButton(
-              onPressed: _goNext,
-              child: const Text('Next'),
-            ),
-          ],
+          ),
 
-        ),
-      ],
+
+
+        ],
       ),
     );
   }

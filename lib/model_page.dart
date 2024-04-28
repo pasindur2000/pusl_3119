@@ -3,6 +3,7 @@ import 'package:flutter_cube/flutter_cube.dart';
 import 'dart:ui' as ui;
 import 'dart:math' as math;
 
+
 class ModelPage extends StatefulWidget {
   const ModelPage({Key? key, this.title}) : super(key: key);
 
@@ -81,7 +82,7 @@ class _ModelPageState extends State<ModelPage>
     scene.camera.position.z = 50;
     _moonObj = Object(scale: Vector3(2.0, 2.0, 2.0), backfaceCulling: true, fileName: 'assets/images/background.jpeg');
     _moon = Object(name: 'moon', scale: Vector3(10, 10, 10));
-    generateSphereObject(_moon!, 'surface', 0.9, true, 'assets/images/R.png');
+    generateSphereObject(_moon!, 'surface', 0.5, true, 'assets/images/panonew.jpeg');
     _moonObj!.add(_moon!);
     scene.world.add(_moonObj!);
   }
