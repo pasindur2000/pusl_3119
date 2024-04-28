@@ -6,8 +6,10 @@ import 'package:pano1/ui/screens/home_page.dart';
 import 'package:pano1/ui/screens/profile_page.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pano1/scan_page.dart';
+import 'package:pano1/ui/screens/selection_page.dart';
 import '../constants.dart';
 import 'screens/signin_page.dart';
+
 
 
 class RootPage extends StatefulWidget {
@@ -69,7 +71,7 @@ class _RootPageState extends State<RootPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, PageTransition(child: const PanoramaScreen(), type: PageTransitionType.bottomToTop));
+          Navigator.push(context, PageTransition(child: const SelectPage(), type: PageTransitionType.bottomToTop));
         },
         child: Image.asset('assets/images/2nd_icon.png', height: 38.0,),
         backgroundColor: Constants.primaryColor,
