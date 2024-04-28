@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pano1/constants.dart';
 import 'package:pano1/ui/onboarding_screen.dart';
 import 'package:pano1/scan_page.dart';
+import 'package:pano1/ui/screens/Leaves Diseases/homeL.dart';
+
 
 class SelectPage extends StatefulWidget {
   const SelectPage({Key? key}) : super(key: key);
@@ -53,7 +55,12 @@ class _SelectPageState extends State<SelectPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomeLeaves()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white.withOpacity(0.6), // Change this value to adjust the opacity
                     minimumSize: const Size(200, 50), // Change these values to adjust the size
