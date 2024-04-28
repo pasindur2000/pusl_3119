@@ -4,6 +4,8 @@ import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:developer' as devtools;
 
+import '../../../constants.dart';
+
 class HomeLeaves extends StatefulWidget {
   const HomeLeaves({Key? key}) : super(key: key);
 
@@ -19,8 +21,8 @@ class _HomeLeavesState extends State<HomeLeaves> {
 
   Future<void> _tfliteInit() async{
     String? res = await Tflite.loadModel(
-        model: "assets/models/model_unquant.tflite",
-        labels: "assets/models/labels.txt",
+        model: "assets/model/model_unquant.tflite",
+        labels: "assets/model/labels.txt",
         numThreads: 1, // defaults to 1
         isAsset: true, // defaults to true, set to false to load resources outside assets
         useGpuDelegate: false // defaults to false, set to true to use GPU delegate
@@ -74,117 +76,159 @@ class _HomeLeavesState extends State<HomeLeaves> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tomato Disease Detection"),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 12,
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/bg.jpg'),
+                fit: BoxFit.cover,
               ),
-              Card(
-                elevation: 20,
-                clipBehavior: Clip.hardEdge,
-                child: SizedBox(
-                  width: 300,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 18,
-                        ),
-                        Container(
-                          height: 280,
-                          width: 280,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              image: const DecorationImage(
-                                  image: AssetImage('assets/images/up.png'))
-                          ),
-                          child: filePath == null ? const Text('')
-                              : Image.file(filePath!, fit: BoxFit.fill,),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                label,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Text(
-                                "The Accuracy is ${confidence.toStringAsFixed(0)}%",
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                            ],
-                          ),)
-                      ],
+            ),
+          ),
+          Positioned(
+            top: 50,
+            left: 20,
+            right: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.white.withOpacity(.6),
                     ),
+                    child: Icon(Icons.arrow_back_outlined,color: Constants.primaryColor,),
                   ),
                 ),
-              ),
-
-              const SizedBox(
-                height: 8,
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 10
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(13),
-                    ),
-                    foregroundColor: Colors.black
-                ),
-                child: const Text(
-                    'Take a photo'
-                ),
-              ),
-
-              const SizedBox(
-                height: 8,
-              ),
-
-              ElevatedButton(
-                onPressed: () {
-                  pickImageGallery();
-                },
-                style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 10
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(13),
-                    ),
-                    foregroundColor: Colors.black
-                ),
-                child: const Text(
-                    'Pick from Gallery'
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 30.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Card(
+                    elevation: 20,
+                    clipBehavior: Clip.hardEdge,
+                    child: SizedBox(
+                      width: 300,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            Container(
+                              height: 280,
+                              width: 280,
+                              decoration: BoxDecoration(
+                                color: Constants.primaryColor.withOpacity(.15),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: filePath == null ? const Text('')
+                                  : Image.file(filePath!, fit: BoxFit.fill,),
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    label,
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    "The Accuracy is ${confidence.toStringAsFixed(0)}%",
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                ],
+                              ),)
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 30.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  ElevatedButton(
+                    onPressed: (){},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white.withOpacity(0.6), // Change this value to adjust the opacity
+                      minimumSize: const Size(200, 50), // Change these values to adjust the size
+                    ),
+                    child: const Text(
+                      'Take A Photo',
+                      style: TextStyle(
+                          color: Color(0xff296e48),
+                          fontSize: 20
+                      ), ),
+                  ),
+
+                  const SizedBox(
+                    height: 15,
+                  ),
+
+                  ElevatedButton(
+                    onPressed: (){
+                      pickImageGallery();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white.withOpacity(0.6), // Change this value to adjust the opacity
+                      minimumSize: const Size(200, 50), // Change these values to adjust the size
+                    ),
+                    child: const Text(
+                      'Pick from gallery',
+                      style: TextStyle(
+                          color: Color(0xff296e48),
+                          fontSize: 20
+                      ), ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
+
+
+
 }
