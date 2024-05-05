@@ -47,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Row(
                     children: [
                       Text(
-                        'Pasindu Ind',
+                        'Pasindu R',
                         style: TextStyle(
                           color: Constants.blackColor,
                           fontSize: 20,

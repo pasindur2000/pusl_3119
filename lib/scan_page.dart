@@ -1,16 +1,24 @@
 import 'dart:ffi';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ffi/ffi.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pano1/ui/screens/loglistview.dart';
 import 'package:path_provider/path_provider.dart';
 import 'constants.dart';
 import 'model_page.dart';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
+
+
+late User loggedinuser;
+late String client;
+
 
 
 class ImagesStitch {
@@ -48,6 +56,39 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
   String? _imagePathToShow = null;
   bool _panoramaCreated = false;
 
+
+  ///to get current user
+  void getcurrentuser() async {
+    try {
+      // final user = await _auth.currentUser();
+      ///yata line eka chatgpt code ekk meka gatte uda line eke error ekk ena hinda hrytama scene eka terenne na
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        loggedinuser = user;
+        client = loggedinuser.email!;
+
+        ///i have to call the getdatafrm the function here and parse client as a parameter
+
+        print(loggedinuser.email);
+
+
+
+
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+  ///curent ser ed
+  ///superinit
+  @override
+  void initState() {
+    super.initState();
+    getcurrentuser();
+  }
+  DateTime now = DateTime.now();
+  final _firestore = FirebaseFirestore.instance;
+
   Future<void> _uploadImage() async{
     if(_imagePathToShow != null && _panoramaCreated) {
       File file = File(_imagePathToShow!);
@@ -59,7 +100,64 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
         Reference storageReference = storage.ref('uploads/${basename(file.path)}');
 
         // Upload the file to Firebase Storage
+        UploadTask uploadTask = storageReference.putFile(file);
+        TaskSnapshot taskSnapshot = await uploadTask;
+        String downloadURL = await taskSnapshot.ref.getDownloadURL();
+
+        //to pload to firestore
+        String scanid = "$client$now";
+        final pnromaset =
+        _firestore.collection("logs").doc(scanid);
+        pnromaset.set({
+          'scanid': scanid,
+          'plink': downloadURL,
+
+        });
+
+        // Print the download URL
+        if (kDebugMode) {
+          print('Image uploaded successfully. Download URL: $downloadURL');
+        }
+
+        setState(() {
+          _panoramaCreated = false;
+        });
+        ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+          const SnackBar(content: Text('Panorama created and uploaded successfully')),
+        );
+      } catch (e) {
+        // If any error occurs
+        if (kDebugMode) {
+          print(e);
+        }
+      }
+    } else if(_imagePathToShow != null && !_panoramaCreated) {
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+        const SnackBar(content: Text('Panorama not created yet')),
+      );
+    } else {
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+        const SnackBar(content: Text('No image selected')),
+      );
+    }
+  }
+
+  /*Future<void> _uploadImage() async{
+    if(_imagePathToShow != null && _panoramaCreated) {
+      File file = File(_imagePathToShow!);
+      try {
+        // Initialize Firebase Storage with your bucket
+        FirebaseStorage storage = FirebaseStorage.instanceFor(bucket: 'gs://disectornew.appspot.com');
+
+        // Create a reference to the location you want to upload to in Firebase Storage
+        Reference storageReference = storage.ref('uploads/${basename(file.path)}');
+
+        // Upload the file to Firebase Storage
         await storageReference.putFile(file);
+
+        ///url
+
+        ///url end
 
         // Success!
         if (kDebugMode) {
@@ -87,6 +185,7 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
       );
     }
   }
+  */
 
   Future<void> _pickImages() async {
     final imageFiles = await _picker.pickMultiImage();
@@ -192,8 +291,30 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
               ),
             ),
           ),
-
-
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.all(40.0), // Increased padding
+              child: ElevatedButton(
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  gemlist()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white.withOpacity(0.6), // Change this value to adjust the opacity
+                ),
+                child: const Text(
+                  'List',
+                  style: TextStyle(
+                      color: Color(0xff296e48),
+                      fontSize: 20
+                  ),  // Change this value to adjust the font size
+                ),
+              ),
+            ),
+          ),
 
         ],
       ),

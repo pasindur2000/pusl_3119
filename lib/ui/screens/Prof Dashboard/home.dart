@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class DiseasesPage extends StatefulWidget {
-  const DiseasesPage({Key? key}) : super(key: key);
+class P_Dashboard extends StatefulWidget {
+  const P_Dashboard({Key? key}) : super(key: key);
 
   @override
-  State<DiseasesPage> createState() => _DiseasesPageState();
+  State<P_Dashboard> createState() => _P_DashboardState();
 }
 
-class _DiseasesPageState extends State<DiseasesPage> {
+class _P_DashboardState extends State<P_Dashboard> {
   final List<String> items = List<String>.generate(30, (i) => "Item ${i + 1}");
 
   @override
