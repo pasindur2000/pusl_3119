@@ -4,7 +4,7 @@ import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:developer' as devtools;
 
-import '../../../constants.dart';
+import '../../../../constants.dart';
 
 class HomeLeaves extends StatefulWidget {
   const HomeLeaves({Key? key}) : super(key: key);

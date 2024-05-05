@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pano1/constants.dart';
 import 'package:pano1/ui/onboarding_screen.dart';
 import 'package:pano1/scan_page.dart';
-import 'package:pano1/ui/screens/Leaves Diseases/homeL.dart';
+import 'package:pano1/ui/screens/Leaves%20Diseases/Home/homeL.dart';
 
 
 class SelectPage extends StatefulWidget {
@@ -85,7 +85,7 @@ class _SelectPageState extends State<SelectPage> {
                     minimumSize: const Size(200, 50), // Change these values to adjust the size
                   ),
                   child: const Text(
-                    'TUMOR DISEASES',
+                    'FRUIT DISEASES',
                     style: TextStyle(
                         color: Color(0xff296e48),
                         fontSize: 20
