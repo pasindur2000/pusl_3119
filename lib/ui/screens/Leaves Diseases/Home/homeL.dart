@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:developer' as devtools;
+import 'result_page.dart';
 
 import '../../../../constants.dart';
 
@@ -55,10 +56,23 @@ class _HomeLeavesState extends State<HomeLeaves> {
       return;
     }
     devtools.log(recognitions.toString());
+
     setState(() {
       confidence = (recognitions[0]['confidence']*100);
       label = recognitions[0]['label'].toString();
     });
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResultPage(
+          imageFile: imageMap,
+          label: label,
+          confidence: confidence,
+        ),
+      ),
+    );
+
   }
 
   @override
@@ -108,73 +122,6 @@ class _HomeLeavesState extends State<HomeLeaves> {
                   ),
                 ),
               ],
-            ),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 30.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Card(
-                    elevation: 20,
-                    clipBehavior: Clip.hardEdge,
-                    child: SizedBox(
-                      width: 300,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 18,
-                            ),
-                            Container(
-                              height: 280,
-                              width: 280,
-                              decoration: BoxDecoration(
-                                color: Constants.primaryColor.withOpacity(.15),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: filePath == null ? const Text('')
-                                  : Image.file(filePath!, fit: BoxFit.fill,),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    label,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  Text(
-                                    "The Accuracy is ${confidence.toStringAsFixed(0)}%",
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                ],
-                              ),)
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
             ),
           ),
           Align(
@@ -228,7 +175,4 @@ class _HomeLeavesState extends State<HomeLeaves> {
       ),
     );
   }
-
-
-
 }

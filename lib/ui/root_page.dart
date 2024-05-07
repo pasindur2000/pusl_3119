@@ -27,7 +27,7 @@ class _RootPageState extends State<RootPage> {
     HomePage(),
     DiseasesPage(),
     ProfilePage(),
-    CommunityPage(),
+    Community(),
   ];
 
   // List of the pages icons
