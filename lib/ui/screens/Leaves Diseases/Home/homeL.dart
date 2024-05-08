@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:developer' as devtools;
+import '../../../../constants.dart';
 import 'result_page.dart';
 
-import '../../../../constants.dart';
+// Define colors
+const Color kSecondary = Color(0xFFABCDEF);
+const Color kMain = Color(0xFF012345);
+const Color kWhite = Colors.white;
 
 class HomeLeaves extends StatefulWidget {
   const HomeLeaves({Key? key}) : super(key: key);
@@ -15,12 +19,11 @@ class HomeLeaves extends StatefulWidget {
 }
 
 class _HomeLeavesState extends State<HomeLeaves> {
-
   File? filePath;
   String label = '';
   double confidence = 0.0;
 
-  Future<void> _tfliteInit() async{
+  Future<void> _tfliteInit() async {
     String? res = await Tflite.loadModel(
         model: "assets/model/model_unquant.tflite",
         labels: "assets/model/labels.txt",
@@ -74,7 +77,6 @@ class _HomeLeavesState extends State<HomeLeaves> {
     );
 
   }
-
   @override
   void dispose() {
     super.dispose();
@@ -104,8 +106,8 @@ class _HomeLeavesState extends State<HomeLeaves> {
             top: 50,
             left: 20,
             right: 20,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
                   onTap: (){
@@ -121,6 +123,61 @@ class _HomeLeavesState extends State<HomeLeaves> {
                     child: Icon(Icons.arrow_back_outlined,color: Constants.primaryColor,),
                   ),
                 ),
+                SizedBox(height: 40),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 73.0, vertical: 10.0), // Adjust the padding values as needed
+                  child: Text(
+                    'Instructions',
+                    style: TextStyle(
+                      color: kWhite,
+                      fontSize: 45,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 8),
+                Container(
+                  margin: EdgeInsets.all(20.0), // Adjust margin as needed
+                  padding: EdgeInsets.all(10.0), // Adjust padding as needed
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.6), // Change color as needed
+                    borderRadius: BorderRadius.circular(10.0), // Adjust border radius as needed
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.white.withOpacity(.6),
+                          child: Text(
+                            '1',
+                            style: TextStyle(color: Constants.primaryColor),
+                          ),
+                        ),
+                        title: Text(
+                          'Take/Select a photo of an affected plant by tapping the camera button below',
+                          style: TextStyle(color: Constants.primaryColor,fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.white.withOpacity(.6),
+                          child: Text(
+                            '2',
+                            style: TextStyle(color: Constants.primaryColor),
+                          ),
+                        ),
+                        title: Text(
+                          'Give it a short while before you can get a suggestion of the disease',
+                          style: TextStyle(color: Constants.primaryColor,fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
               ],
             ),
           ),
