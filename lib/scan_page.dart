@@ -168,6 +168,14 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/bg.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           Positioned(
             top: 50,
             left: 20,
@@ -184,7 +192,7 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
                     width: 40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: Constants.primaryColor.withOpacity(.15),
+                      color: Colors.white.withOpacity(.6),
                     ),
                     child: Icon(Icons.arrow_back_outlined, color: Constants.primaryColor,),
                   ),
@@ -196,7 +204,7 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
                     width: 40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: Constants.primaryColor.withOpacity(.15),
+                      color: Colors.white.withOpacity(.6),
                     ),
                     child: Icon(Icons.file_upload_outlined, color: Constants.primaryColor,),
                   ),
@@ -207,8 +215,18 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
           // Display the panorama image if it's created
           if (_imagePathToShow != null)
             Center(
-              child: Image.file(File(_imagePathToShow!)),
+              child: SizedBox(
+                height: 250, // Adjust the height according to your preference
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Image.file(File(_imagePathToShow!)),
+                ),
+              ),
             ),
+
           Align(
             alignment: Alignment.bottomLeft,
             child: Padding(
