@@ -7,6 +7,8 @@ import 'dart:ui' as ui;
 import 'dart:math' as math;
 import 'dart:io';
 
+import 'constants.dart';
+
 //
 class ModelPage extends StatefulWidget {
   const ModelPage({Key? key, this.title}) : super(key: key);
@@ -126,14 +128,44 @@ class _ModelPageState extends State<ModelPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? 'Default Title'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Cube(
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/bg.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 50,
+            left: 20,
+            right: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.white.withOpacity(.6),
+                    ),
+                    child: Icon(Icons.arrow_back_outlined,color: Constants.primaryColor,),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        Cube(
           onSceneCreated: _onSceneCreated,
         ),
+      ],
       ),
     );
   }
