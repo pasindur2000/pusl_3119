@@ -142,50 +142,6 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
     }
   }
 
-  /*Future<void> _uploadImage() async{
-    if(_imagePathToShow != null && _panoramaCreated) {
-      File file = File(_imagePathToShow!);
-      try {
-        // Initialize Firebase Storage with your bucket
-        FirebaseStorage storage = FirebaseStorage.instanceFor(bucket: 'gs://disectornew.appspot.com');
-
-        // Create a reference to the location you want to upload to in Firebase Storage
-        Reference storageReference = storage.ref('uploads/${basename(file.path)}');
-
-        // Upload the file to Firebase Storage
-        await storageReference.putFile(file);
-
-        ///url
-
-        ///url end
-
-        // Success!
-        if (kDebugMode) {
-          print('Image uploaded successfully');
-        }
-        setState(() {
-          _panoramaCreated = false;
-        });
-        ScaffoldMessenger.of(context as BuildContext).showSnackBar(
-          const SnackBar(content: Text('Panorama created and uploaded successfully')),
-        );
-      } catch (e) {
-        // If any error occurs
-        if (kDebugMode) {
-          print(e);
-        }
-      }
-    } else if(_imagePathToShow != null && !_panoramaCreated) {
-      ScaffoldMessenger.of(context as BuildContext).showSnackBar(
-        const SnackBar(content: Text('Panorama not created yet')),
-      );
-    } else {
-      ScaffoldMessenger.of(context as BuildContext).showSnackBar(
-        const SnackBar(content: Text('No image selected')),
-      );
-    }
-  }
-  */
 
   Future<void> _pickImages() async {
     final imageFiles = await _picker.pickMultiImage();
@@ -248,6 +204,11 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
               ],
             ),
           ),
+          // Display the panorama image if it's created
+          if (_imagePathToShow != null)
+            Center(
+              child: Image.file(File(_imagePathToShow!)),
+            ),
           Align(
             alignment: Alignment.bottomLeft,
             child: Padding(
@@ -291,30 +252,7 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: const EdgeInsets.all(40.0), // Increased padding
-              child: ElevatedButton(
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  gemlist()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white.withOpacity(0.6), // Change this value to adjust the opacity
-                ),
-                child: const Text(
-                  'List',
-                  style: TextStyle(
-                      color: Color(0xff296e48),
-                      fontSize: 20
-                  ),  // Change this value to adjust the font size
-                ),
-              ),
-            ),
-          ),
+
 
         ],
       ),

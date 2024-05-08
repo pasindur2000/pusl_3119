@@ -156,7 +156,7 @@ class _HomeLeavesState extends State<HomeLeaves> {
                           ),
                         ),
                         title: Text(
-                          'Take/Select a photo of an affected plant by tapping the camera button below',
+                          'Take/Select a photo of an affected plant by tapping the button below',
                           style: TextStyle(color: Constants.primaryColor,fontWeight: FontWeight.bold),
                         ),
                       ),

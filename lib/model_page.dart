@@ -134,7 +134,6 @@ class _ModelPageState extends State<ModelPage>
         child: Cube(
           onSceneCreated: _onSceneCreated,
         ),
-
       ),
     );
   }
