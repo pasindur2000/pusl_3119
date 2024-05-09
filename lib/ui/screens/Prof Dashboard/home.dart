@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pano1/ui/screens/Prof%20Dashboard/prof_3dmodel.dart';
 import 'package:pano1/ui/screens/single3dmodel.dart';
+import '../../../constants.dart';
 import '../../../firebase_options.dart';
 
 
@@ -39,14 +41,10 @@ class gemlistview extends State<Dashboard_P> {
   void getcurrentuser() async {
     try {
       // final user = await _auth.currentUser();
-      ///yata line eka chatgpt code ekk meka gatte uda line eke error ekk ena hinda hrytama scene eka terenne na
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
         loggedinuser = user;
         client = loggedinuser.email!;
-
-        ///i have to call the getdatafrm the function here and parse client as a parameter
-
         print(loggedinuser.email);
       }
     } catch (e) {
@@ -57,32 +55,13 @@ class gemlistview extends State<Dashboard_P> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Color(0xFFDBD6E5),
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios_new_outlined,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          title: Text(
-            'Gem Collection',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          backgroundColor: Color(0xFFDBD6E5),
-        ),
         body: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(50.0),
               child: TextField(
                 onChanged: (value) {
                   // Update the search value when the user types
@@ -129,34 +108,49 @@ class gemlistview extends State<Dashboard_P> {
                       final doc = filteredData[index];
                       final data = doc.data() as Map<String, dynamic>;
 
-                      return Card(
-                        color: Color(0xFFA888EB),
-                        child: ListTile(
-                          leading: Icon(Icons.add),
-                          title: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Single3d(
-                                      gemcode: '${data['scanid']}',ilink:'${data['plink']}' ,)),
-                              );
-                              print('${data['scanid']}');
-                            },
-                            child: Ink(
-                              child: Text(
-                                doc.id,
-                                style: TextStyle(
-                                  color: Color(0xFF43468E),
-                                  fontSize: 18.0,
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 3.0, // Increase the vertical space between items
+                          horizontal: 10.0, // Add horizontal padding
+                        ),
+                        child: SizedBox(
+                          height: 80, // Adjust the height of the card
+                          child: Card(
+                            color: Color(0xffEAECEB),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: ListTile(
+                                leading: Icon(Icons.add),
+                                title: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Prof_Single3d(
+                                          gemcode: '${data['scanid']}',
+                                          ilink: '${data['plink']}',
+                                        ),
+                                      ),
+                                    );
+                                    print('${data['scanid']}');
+                                  },
+                                  child: Ink(
+                                    child: Text(
+                                      doc.id,
+                                      style: TextStyle(
+                                        color: Constants.primaryColor,
+                                        fontSize: 16.0, // Decrease the font size
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                trailing: Container(
+                                  width: 40.0, // Adjust the width of the container
+                                  height: 40.0, // Adjust the height of the container
+                                  decoration: BoxDecoration(),
                                 ),
                               ),
                             ),
-                          ),
-                          trailing: Container(
-                            width: 40.0,
-                            height: 40.0,
-                            decoration: BoxDecoration(),
                           ),
                         ),
                       );
@@ -165,8 +159,6 @@ class gemlistview extends State<Dashboard_P> {
                 },
               ),
             ),
-
-
           ],
         ),
       ),

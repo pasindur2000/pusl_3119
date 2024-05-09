@@ -10,6 +10,8 @@ import 'package:pano1/ui/screens/widgets/custom_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'Prof Dashboard/home.dart';
+
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
 
@@ -186,7 +188,7 @@ class _LoginState extends State<SignIn> {
                   Navigator.pushReplacement(
                       context,
                       PageTransition(
-                          child: const RootPage(),
+                          child: const SignUp(),
                           type: PageTransitionType.bottomToTop));
                 },
                 child: Center(
@@ -211,7 +213,9 @@ class _LoginState extends State<SignIn> {
               ),
               Center(
                 child: GestureDetector(
-                  onTap: (){},
+                  onTap: () {
+                    _showCodeInputDialog(context); // Show code input dialog
+                  },
                   child: Container(
                     width: 250,
                     decoration: BoxDecoration(
@@ -237,6 +241,56 @@ class _LoginState extends State<SignIn> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showCodeInputDialog(BuildContext context) {
+    String enteredCode = '';
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Enter Code'),
+          content: TextField(
+            onChanged: (value) {
+              enteredCode = value;
+            },
+            decoration: InputDecoration(
+              hintText: 'Enter code...',
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                // Validate the entered code
+                if (enteredCode == '123456') {
+                  // Code is correct, navigate to agriculture professional dashboard
+                  Navigator.pushReplacement(
+                    context,
+                    PageTransition(
+                      child: Dashboard_P(), // Replace RootPage with your agriculture professional dashboard page
+                      type: PageTransitionType.bottomToTop,
+                    ),
+                  );
+                } else {
+                  // Incorrect code, display an error message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Invalid code. Please try again.'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                }
+              },
+              child: Text(
+                'Submit',
+                style: TextStyle(color: Constants.primaryColor), // Change the color to green
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
