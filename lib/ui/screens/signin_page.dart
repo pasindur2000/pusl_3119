@@ -206,6 +206,33 @@ class _LoginState extends State<SignIn> {
                   ])),
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: GestureDetector(
+                  onTap: (){},
+                  child: Container(
+                    width: 250,
+                    decoration: BoxDecoration(
+                      color: Color(0xff475965),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: const Center(
+                      child: Text(
+                        'Agriculture Professional',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+
+
             ],
           ),
         ),
