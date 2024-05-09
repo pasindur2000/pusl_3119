@@ -19,12 +19,16 @@ class _HomePageState extends State<HomePage> {
 
   List<Plant> _plantList = Plant.plantList;
   List<String> _plantTypes = [
-    'Recommended',
-    'Vegetable',
-    'Fruits',
-    'Grains',
-    'Seeds',
+    'Most Recents',
+    'Tomato',
+    'Potato',
+    'Bell Pepper',
   ];
+
+  //Toggle Favorite button
+  bool toggleIsFavorated(bool isFavorited) {
+    return !isFavorited;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,9 +125,15 @@ class _HomePageState extends State<HomePage> {
                               height: 50,
                               width: 50,
                               child: IconButton(
-                                onPressed: null,
-                                icon: Icon(_plantList[index].isFavorated == true ? Icons.favorite : Icons.favorite_border),
-                                color: Constants.primaryColor,
+                                onPressed: (){
+                                  setState(() {
+                                    bool isFavorited = toggleIsFavorated(_plantList[index].isFavorated);
+                                    _plantList[index].isFavorated = isFavorited;
+                                  });
+                                },
+                                icon: Icon(_plantList[index].isFavorated == true
+                                    ? Icons.favorite
+                                    : Icons.favorite_border, color: Constants.primaryColor,),
                                 iconSize: 30,
                               ),
                               decoration: BoxDecoration(
@@ -137,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                             right: 50,
                             top: 50,
                             bottom: 50,
-                            child: Image.asset('assets/images/1st.png'),
+                            child: Image.asset(_plantList[index].imageURL),
                           ),
                           Positioned(
                             bottom: 15,
@@ -231,7 +241,7 @@ class _HomePageState extends State<HomePage> {
                               right: 0,
                               child: SizedBox(
                                 height: 80.0,
-                                child: Image.asset('assets/images/1st.png'),
+                                child: Image.asset(_plantList[index].imageURL),
                               ),
                             ),
                             Positioned(
