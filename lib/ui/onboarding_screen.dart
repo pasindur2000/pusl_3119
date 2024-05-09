@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pano1/constants.dart';
-
-
 import 'screens/signin_page.dart';
 
 

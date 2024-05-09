@@ -40,8 +40,8 @@ class Plant {
         imageURL: 'assets/images/Bacterial_Spot.png',
         isFavorated: true,
         decription:
-        'possibleCauses - Xanthomonas bacteria which can be introduced into a garden on contaminated seed and transplants, which may or may not show symptoms. '
-            'possibleSolution - Remove symptomatic plants from the field or greenhouse to prevent the spread of bacteria to healthy plants.',
+        'PossibleCauses - Xanthomonas bacteria which can be introduced into a garden on contaminated seed and transplants, which may or may not show symptoms.'
+            '\n\nPossibleSolution - Remove symptomatic plants from the field or greenhouse to prevent the spread of bacteria to healthy plants.',
         isSelected: false),
     Plant(
         plantId: 1,
@@ -55,8 +55,8 @@ class Plant {
         imageURL: 'assets/images/Early_Blight.png',
         isFavorated: false,
         decription:
-        'possibleCauses - The fungus Alternaria solani, high humidity and long periods of leaf wetness.'
-         'possibleSolution - Maintaining optimum growing conditions: proper fertilization, irrigation, and pests management.',
+        'PossibleCauses - The fungus Alternaria solani, high humidity and long periods of leaf wetness.'
+         '\n\nPossibleSolution - Maintaining optimum growing conditions: proper fertilization, irrigation, and pests management.',
         isSelected: false),
     Plant(
         plantId: 2,
@@ -70,8 +70,8 @@ class Plant {
         imageURL: 'assets/images/Late_Blight.png',
         isFavorated: false,
         decription:
-        'possibleCauses - Caused by the water mold Phytophthora infesting.'
-        'possibleSolution - Timely application of fungicide',
+        'PossibleCauses - Caused by the water mold Phytophthora infesting.'
+        '\n\nPossibleSolution - Timely application of fungicide',
         isSelected: false),
     Plant(
         plantId: 3,
@@ -85,8 +85,8 @@ class Plant {
         imageURL: 'assets/images/P_Early_Blight.png',
         isFavorated: false,
         decription:
-        'possibleCauses - The fungus Alternaria solani, high humidity and long periods of leaf wetness.'
-        'possibleSolution - Maintaining optimum growing conditions: proper fertilization, irrigation, and pests management.',
+        'PossibleCauses - The fungus Alternaria solani, high humidity and long periods of leaf wetness.'
+        '\n\nPossibleSolution - Maintaining optimum growing conditions: proper fertilization, irrigation, and pests management.',
         isSelected: false),
     Plant(
         plantId: 4,
@@ -100,8 +100,8 @@ class Plant {
         imageURL: 'assets/images/P_Late_Blight.png',
         isFavorated: true,
         decription:
-        'possibleCauses - Occurs in humid regions with temperatures ranging between 4 and 29 °C.'
-        'possibleSolution - Eliminating cull piles and volunteer potatoes, using proper harvesting and storage practices, and applying fungicides when necessary.',
+        'PossibleCauses - Occurs in humid regions with temperatures ranging between 4 and 29 °C.'
+        '\n\nPossibleSolution - Eliminating cull piles and volunteer potatoes, using proper harvesting and storage practices, and applying fungicides when necessary.',
         isSelected: false),
     Plant(
         plantId: 5,
@@ -115,8 +115,8 @@ class Plant {
         imageURL: 'assets/images/B_Bacterial_Spot.png',
         isFavorated: false,
         decription:
-        'possibleCauses - Caused by Xanthomonas bacteria, spread through splashing rain.'
-        'possibleSolution - Spray early and often. Use copper and Mancozeb sprays.',
+        'PossibleCauses - Caused by Xanthomonas bacteria, spread through splashing rain.'
+        '\n\nPossibleSolution - Spray early and often. Use copper and Mancozeb sprays.',
         isSelected: false),
     Plant(
         plantId: 6,
@@ -130,8 +130,8 @@ class Plant {
         imageURL: 'assets/images/Leaf Mold.png',
         isFavorated: false,
         decription:
-        'possibleCauses - High relative humidity (greater than 85%'
-        'possibleSolution - Growing leaf mold resistant varieties, use drip irrigation to avoid watering foliage.',
+        'PossibleCauses - High relative humidity (greater than 85%'
+        '\n\nPossibleSolution - Growing leaf mold resistant varieties, use drip irrigation to avoid watering foliage.',
         isSelected: false),
     Plant(
         plantId: 7,
@@ -145,8 +145,8 @@ class Plant {
         imageURL: 'assets/images/Target_Spot.png',
         isFavorated: false,
         decription:
-        'possibleCauses - The fungus Corynespora cassiicola which spreads to plants.'
-        'possibleSolution - Planting resistant varieties, keeping farms free from weeds.',
+        'PossibleCauses - The fungus Corynespora cassiicola which spreads to plants.'
+        '\n\nPossibleSolution - Planting resistant varieties, keeping farms free from weeds.',
         isSelected: false),
     Plant(
         plantId: 8,
@@ -160,8 +160,8 @@ class Plant {
         imageURL: 'assets/images/Mosaic_Virus.png',
         isFavorated: false,
         decription:
-        'possibleCauses - Spread by aphids and other insects, mites, fungi, nematodes, and contact; pollen and seeds can carry the infection as well.'
-        'possibleSolution - No cure for infected plants, remove all infected plants and destroy them.',
+        'PossibleCauses - Spread by aphids and other insects, mites, fungi, nematodes, and contact; pollen and seeds can carry the infection as well.'
+        '\n\nPossibleSolution - No cure for infected plants, remove all infected plants and destroy them.',
         isSelected: false),
   ];
 

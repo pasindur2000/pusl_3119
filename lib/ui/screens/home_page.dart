@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:pano1/constants.dart';
 import 'package:pano1/models/plants.dart';
+import 'package:pano1/ui/screens/details_page.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'home_page';
@@ -113,7 +115,17 @@ class _HomePageState extends State<HomePage> {
                   itemCount: _plantList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index){
-                    return Container(
+                    return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  child: DetailPage(
+                                    plantId: _plantList[index].plantId,
+                                  ),
+                                  type: PageTransitionType.bottomToTop));
+                        },
+                      child: Container(
                       width: 200,
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       child: Stack(
@@ -177,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Text( _plantList[index].price.toString() , style: TextStyle(
+                              child: Text( _plantList[index].rating.toString() , style: TextStyle(
                                   color: Constants.primaryColor,
                                   fontSize: 16
                               ),),
@@ -190,6 +202,7 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(20),
                       ),
 
+                      )
                     );
 
 
@@ -198,7 +211,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Container(
               padding: const EdgeInsets.only(left: 16, bottom: 20, top: 20),
-              child: const Text('New Diseases', style: TextStyle(
+              child: const Text('Plant Diseases', style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18.0,
               ),),
@@ -263,11 +276,22 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Container(
                           padding: const EdgeInsets.only(right: 10),
-                          child: Text(_plantList[index].price.toString(), style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0,
-                            color: Constants.primaryColor,
-                          ),),
+                          child: Row(
+                            children: [
+                              Text(
+                                _plantList[index].rating.toString(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0,
+                                  color: Constants.primaryColor,
+                                ),
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.grey, // Customize star color as needed
+                              ),
+                            ],
+                          ),
                         )
                       ],
                     ),

@@ -1,7 +1,8 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:pano1/models/plants.dart';
 import 'package:pano1/ui/screens/community_page.dart';
-import 'package:pano1/ui/screens/diseases_page.dart';
+import 'package:pano1/ui/screens/favorites_page.dart';
 import 'package:pano1/ui/screens/home_page.dart';
 import 'package:pano1/ui/screens/profile_page.dart';
 import 'package:page_transition/page_transition.dart';
@@ -20,20 +21,24 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
+  List<Plant> favorites = [];
+
   int _bottomNavIndex = 0;
 
   // List of the pages
-  List<Widget> pages = [
-    HomePage(),
-    DiseasesPage(),
-    ProfilePage(),
-    Community(),
-  ];
+  List<Widget> _widgetOptions() {
+    return [
+      HomePage(),
+      FavoritePage(favoritedPlants: favorites,),
+      const ProfilePage(),
+      Community(),
+    ];
+  }
 
   // List of the pages icons
   List<IconData> iconList = [
     Icons.home,
-    Icons.history,
+    Icons.favorite,
     Icons.person,
     Icons.people_rounded,
   ];
@@ -67,7 +72,7 @@ class _RootPageState extends State<RootPage> {
       ),
       body: IndexedStack(
         index: _bottomNavIndex,
-        children: pages,
+        children: _widgetOptions(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
@@ -88,6 +93,9 @@ class _RootPageState extends State<RootPage> {
         onTap: (index){
           setState(() {
             _bottomNavIndex = index;
+            final List<Plant> favoritedPlants = Plant.getFavoritedPlants();
+
+            favorites = favoritedPlants;
           });
         },
       ),

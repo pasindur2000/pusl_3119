@@ -6,7 +6,7 @@ class Constants {
 
   //onboarding texts
   static var titleOne = "Welcome to Disector!";
-  static var descriptionOne = "Your ultimate companion for detecting diseases in vegetables and fruits!";
+  static var descriptionOne = "Your ultimate companion for detecting diseases in Tomatos and more vegetables!";
   static var titleTwo = "Explore our Database!";
   static var descriptionTwo = "Discover a vast collection of diseases affecting fruits and vegetables.";
   static var titleThree = "Stay Informed!";

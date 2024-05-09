@@ -174,10 +174,6 @@ class _Single3dState extends State<Single3d>
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(
-        title: Text( 'Default Title'),
-        centerTitle: true,
-      ),
       body: Center(
         child:Cube(
           onSceneCreated: _onSceneCreated,
