@@ -4,19 +4,6 @@
 This project allow users to detect diseases of tomato fruits and leaves using 3D models and trained machine learning model.
 
 
-## Screenshots
-
-![Disease detection using Machine learning model](screenshots/1.jpg)
-
-![Disease detection using Machine learning model](screenshots/2.jpg)
-
-![Disease detection using 3D models](screenshots/3.jpg)
-
-![Disease detection using 3D models](screenshots/4.jpg)
-
-
-
-
 ## Technologies Used
 
 Flutter: Cross-platform framework for building mobile applications.
@@ -41,6 +28,24 @@ Clone Repository -
 
 Navigate into Project Directory -
 ```cd [project-folder-name] ```
+
+
+
+
+## Screenshots
+
+![Disease detection using Machine learning model](screenshots/1.jpg)
+
+![Disease detection using Machine learning model](screenshots/2.jpg)
+
+![Disease detection using 3D models](screenshots/3.jpg)
+
+![Disease detection using 3D models](screenshots/4.jpg)
+
+
+
+
+
   
 
 
