@@ -180,34 +180,30 @@ class _Prof_Single3dState extends State<Prof_Single3d>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-        // preferredSize: Size.fromHeight(kToolbarHeight + 20),
+      appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-        icon: Icon(Icons.arrow_back),
-    onPressed: () {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => Dashboard_P()),
-    ); // go back to the previous screen
-    },
-    ),
-
-    title: Text(
-    'Professionals',
-    style: TextStyle(color: Colors.black),
-    ),
-    iconTheme: IconThemeData(color: Colors.black),
-    //c
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Dashboard_P()),
+            ); // go back to the previous screen
+          },
         ),
-
+        title: Text(
+          'Professionals',
+          style: TextStyle(color: Colors.black),
+        ),
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
       body: SafeArea(
         child: Stack(
           children: [
             Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/bg22.jpg'),
+                  image: AssetImage('assets/images/bgr.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -219,64 +215,63 @@ class _Prof_Single3dState extends State<Prof_Single3d>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Colors.white.withOpacity(.6),
-                      ),
-                      child: Icon(Icons.arrow_back_outlined,color: Constants.primaryColor,),
-                    ),
-                  ),
                 ],
               ),
             ),
             Cube(
               onSceneCreated: _onSceneCreated,
             ),
-
-            Row(
-              children: [
-                Spacer(),
-                StarDisplay(
-                  key: ValueKey('key'),
-                  value: slectedstar,
-                ),
-                Spacer(),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0), // Adjust the top padding as needed
+              child: Row(
+                children: [
+                  Spacer(),
+                  StarDisplay(
+                    key: ValueKey('key'),
+                    value: slectedstar,
+                  ),
+                  Spacer(),
+                ],
+              ),
             ),
-            SizedBox(height: 40),
-            Row(
-              children: [
-                Spacer(),
-                InteractiveRatingWidget(
-                  maxRating: 5,
-                  filledStar: Icons.star,
-                  unfilledStar: Icons.star_border,
-                  onChanged: (rating) async {
-                    print('Rating changed to $rating');
-                    final failedattempt =
-                    _firestore.collection("logs").doc(selectedgemcode);
-                    failedattempt.set({
-                      'plink':selecedlink,
-                      'scanid':selectedgemcode,
-                      'starcount': rating,
-                    },SetOptions(merge: true));
-                  },
-                ),
-                Spacer(),
-
-              ],
+            SizedBox(height:50), //more space between the two rows of stars
+            Padding(
+              padding: const EdgeInsets.only(top: 50.0), // Add more space between the two rows of stars
+              child: Row(
+                children: [
+                  Spacer(),
+                  InteractiveRatingWidget(
+                    maxRating: 5,
+                    filledStar: Icons.star, // Use Icons.star directly
+                    unfilledStar: Icons.star_border, // Use Icons.star_border directly
+                    onChanged: (rating) async {
+                      print('Rating changed to $rating');
+                      final failedattempt =
+                      _firestore.collection("logs").doc(selectedgemcode);
+                      failedattempt.set({
+                        'plink':selecedlink,
+                        'scanid':selectedgemcode,
+                        'starcount': rating,
+                      },SetOptions(merge: true));
+                    },
+                  ),
+                  Spacer(),
+                ],
+              ),
             )
+
+
+
+
+
           ],
         ),
       ),
     );
   }
+
+
+
+
 
 }
