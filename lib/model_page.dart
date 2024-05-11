@@ -133,7 +133,7 @@ class _ModelPageState extends State<ModelPage>
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/bg.jpg'),
+                image: AssetImage('assets/images/bg22.jpg'),
                 fit: BoxFit.cover,
               ),
             ),

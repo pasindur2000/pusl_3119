@@ -84,7 +84,7 @@ class PlantWidget extends StatelessWidget {
             Container(
               padding: const EdgeInsets.only(right: 10),
               child: Text(
-                r'$' + plantList[index].price.toString(),
+                plantList[index].rating.toString(),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,

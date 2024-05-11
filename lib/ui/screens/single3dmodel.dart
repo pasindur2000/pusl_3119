@@ -10,6 +10,8 @@ import 'dart:ui' as ui;
 import 'dart:math' as math;
 import 'dart:io';
 
+import '../../constants.dart';
+
 late User loggedinuser;
 late String client;
 
@@ -173,17 +175,45 @@ class _Single3dState extends State<Single3d>
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: Center(
-        child:Cube(
-          onSceneCreated: _onSceneCreated,
-        ),
-        /* ElevatedButton(
-          child: Text('test'),
-          onPressed: (){
-            print(imglink);
-          },
-        ),*/
+    return Scaffold(
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/bg22.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 50,
+            left: 20,
+            right: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.white.withOpacity(.6),
+                    ),
+                    child: Icon(Icons.arrow_back_outlined,color: Constants.primaryColor,),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Cube(
+            onSceneCreated: _onSceneCreated,
+          ),
+        ],
       ),
     );
   }

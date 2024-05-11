@@ -55,12 +55,12 @@ class _onboardingScreenState extends State<OnboardingScreen> {
                 description: Constants.descriptionOne,
               ),
               createPage(
-                image: 'assets/images/1st.png',
+                image: 'assets/images/data.png',
                 title: Constants.titleTwo,
                 description: Constants.descriptionTwo,
               ),
               createPage(
-                image: 'assets/images/1st.png',
+                image: 'assets/images/welcome.png',
                 title: Constants.titleThree,
                 description: Constants.descriptionThree,
               ),
