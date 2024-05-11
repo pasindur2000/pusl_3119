@@ -11,6 +11,7 @@ import 'dart:math' as math;
 import 'dart:io';
 
 import '../../constants.dart';
+import 'displaywidget.dart';
 
 late User loggedinuser;
 late String client;
@@ -18,8 +19,9 @@ late String client;
 class Single3d extends StatefulWidget {
   final String gemcode;
   final String ilink;
+  final int scount;
 
-  Single3d({Key? key, required this.gemcode, required this.ilink}) : super(key: key);
+  Single3d({Key? key, required this.gemcode, required this.ilink,required this.scount}) : super(key: key);
 
   @override
   State<Single3d> createState() => _Single3dState();
@@ -39,12 +41,15 @@ class _Single3dState extends State<Single3d>
   late String selectedgemcode;
   String imglink = "";
   late String selecedlink;
+  late int slectedscount;
 
   @override
   void initState() {
     super.initState();
     selectedgemcode = widget.gemcode;
     selecedlink = widget.ilink;
+    slectedscount = widget.scount;
+    print(slectedscount);
     getcurrentuser();
     retrieveData();
     _controller = AnimationController(
@@ -212,6 +217,16 @@ class _Single3dState extends State<Single3d>
           ),
           Cube(
             onSceneCreated: _onSceneCreated,
+          ),
+          Row(
+            children: [
+              Spacer(),
+              StarDisplay(
+                key: ValueKey('key'),
+                value: slectedscount,
+              ),
+              Spacer(),
+            ],
           ),
         ],
       ),

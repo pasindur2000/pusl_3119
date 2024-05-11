@@ -131,13 +131,19 @@ class gemlistview extends State<gemlist> {
                         leading: Icon(Icons.add),
                         title: GestureDetector(
                           onTap: () {
+                            int    newint = '${data['starcount']}' as int;
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Single3d(
-                                    gemcode: '${data['scanid']}',ilink:'${data['plink']}' ,)),
+                                builder: (context) => Single3d(
+                                  gemcode: '${data['scanid']}',
+                                  ilink: '${data['plink']}',
+                                  scount: newint,
+                                ),
+                              ),
                             );
                             print('${data['scanid']}');
+                            print(newint);
                           },
                           child: Ink(
                             child: Text(

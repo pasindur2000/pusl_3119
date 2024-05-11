@@ -7,15 +7,21 @@ import 'package:flutter_cube/flutter_cube.dart';
 import 'dart:ui' as ui;
 import 'dart:math' as math;
 import 'dart:io';
+import '../../../constants.dart';
+import '../displaywidget.dart';
+import '../widget.dart';
+import 'home.dart';
 
 late User loggedinuser;
 late String client;
 
 class Prof_Single3d extends StatefulWidget {
+
   final String gemcode;
   final String ilink;
+  final int scount;
 
-  Prof_Single3d({Key? key, required this.gemcode, required this.ilink}) : super(key: key);
+  Prof_Single3d({Key? key, required this.gemcode, required this.ilink, required this.scount}) : super(key: key);
 
   @override
   State<Prof_Single3d> createState() => _Prof_Single3dState();
@@ -35,12 +41,14 @@ class _Prof_Single3dState extends State<Prof_Single3d>
   late String selectedgemcode;
   String imglink = "";
   late String selecedlink;
+  late int slectedstar;
 
   @override
   void initState() {
     super.initState();
     selectedgemcode = widget.gemcode;
     selecedlink = widget.ilink;
+    slectedstar = widget.scount;
     getcurrentuser();
     retrieveData();
     _controller = AnimationController(
@@ -171,21 +179,102 @@ class _Prof_Single3dState extends State<Prof_Single3d>
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: AppBar(
-        title: Text('Professinals model'),
-        // Add any other properties you want for your AppBar
-      ),
-      body: Center(
-        child:Cube(
-          onSceneCreated: _onSceneCreated,
+    return Scaffold(
+        appBar: AppBar(
+        // preferredSize: Size.fromHeight(kToolbarHeight + 20),
+        backgroundColor: Colors.white,
+        leading: IconButton(
+        icon: Icon(Icons.arrow_back),
+    onPressed: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Dashboard_P()),
+    ); // go back to the previous screen
+    },
+    ),
+
+    title: Text(
+    'Professionals',
+    style: TextStyle(color: Colors.black),
+    ),
+    iconTheme: IconThemeData(color: Colors.black),
+    //c
         ),
-        /* ElevatedButton(
-          child: Text('test'),
-          onPressed: (){
-            print(imglink);
-          },
-        ),*/
+
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/bg22.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 50,
+              left: 20,
+              right: 20,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Colors.white.withOpacity(.6),
+                      ),
+                      child: Icon(Icons.arrow_back_outlined,color: Constants.primaryColor,),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Cube(
+              onSceneCreated: _onSceneCreated,
+            ),
+
+            Row(
+              children: [
+                Spacer(),
+                StarDisplay(
+                  key: ValueKey('key'),
+                  value: slectedstar,
+                ),
+                Spacer(),
+              ],
+            ),
+            SizedBox(height: 40),
+            Row(
+              children: [
+                Spacer(),
+                InteractiveRatingWidget(
+                  maxRating: 5,
+                  filledStar: Icons.star,
+                  unfilledStar: Icons.star_border,
+                  onChanged: (rating) async {
+                    print('Rating changed to $rating');
+                    final failedattempt =
+                    _firestore.collection("logs").doc(selectedgemcode);
+                    failedattempt.set({
+                      'plink':selecedlink,
+                      'scanid':selectedgemcode,
+                      'starcount': rating,
+                    },SetOptions(merge: true));
+                  },
+                ),
+                Spacer(),
+
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

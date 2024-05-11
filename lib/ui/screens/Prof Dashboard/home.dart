@@ -123,12 +123,15 @@ class gemlistview extends State<Dashboard_P> {
                                 leading: Icon(Icons.add),
                                 title: GestureDetector(
                                   onTap: () {
+                                    int newintt = int.parse('${data['starcount']}');
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
+
                                         builder: (context) => Prof_Single3d(
                                           gemcode: '${data['scanid']}',
                                           ilink: '${data['plink']}',
+                                          scount: newintt,
                                         ),
                                       ),
                                     );
