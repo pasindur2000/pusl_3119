@@ -6,13 +6,14 @@ This project allow users to detect diseases of tomato fruits and leaves using 3D
 
 ## Screenshots
 
-![Disease detection using Machine learning model](screenshots/1.jpg)
+![Disease detection using Machine learning model](screenshots/1.jpg){:width="50%"}
 
-![Disease detection using Machine learning model](screenshots/2.jpg)
+![Disease detection using Machine learning model](screenshots/2.jpg){:width="50%"}
 
-![Disease detection using 3D models](screenshots/3.jpg)
+![Disease detection using 3D models](screenshots/3.jpg){:width="50%"}
 
-![Disease detection using 3D models](screenshots/4.jpg)
+![Disease detection using 3D models](screenshots/4.jpg){:width="50%"}
+
 
 
 
