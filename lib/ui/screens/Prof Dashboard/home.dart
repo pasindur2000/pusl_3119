@@ -136,6 +136,8 @@ class gemlistview extends State<Dashboard_P> {
                                       ),
                                     );
                                     print('${data['scanid']}');
+                                    print('${data['starcount']}');
+                                    //print('${data['newintt']}');
                                   },
                                   child: Ink(
                                     child: Text(

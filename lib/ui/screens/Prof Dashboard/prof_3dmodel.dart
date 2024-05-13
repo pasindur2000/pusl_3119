@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
+import 'package:pano1/ui/screens/Prof%20Dashboard/panorama_page.dart';
 import 'dart:ui' as ui;
 import 'dart:math' as math;
 import 'dart:io';
@@ -71,13 +72,13 @@ class _Prof_Single3dState extends State<Prof_Single3d>
   void getcurrentuser() async {
     try {
       // final user = await _auth.currentUser();
-      ///yata line eka chatgpt code ekk meka gatte uda line eke error ekk ena hinda hrytama scene eka terenne na
+
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
         loggedinuser = user;
         client = loggedinuser.email!;
 
-        ///i have to call the getdatafrm the function here and parse client as a parameter
+
 
         print(loggedinuser.email);
       }
@@ -215,6 +216,7 @@ class _Prof_Single3dState extends State<Prof_Single3d>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // Your existing widgets here
                 ],
               ),
             ),
@@ -222,7 +224,7 @@ class _Prof_Single3dState extends State<Prof_Single3d>
               onSceneCreated: _onSceneCreated,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20.0), // Adjust the top padding as needed
+              padding: const EdgeInsets.only(top: 20.0),
               child: Row(
                 children: [
                   Spacer(),
@@ -234,44 +236,48 @@ class _Prof_Single3dState extends State<Prof_Single3d>
                 ],
               ),
             ),
-            SizedBox(height:50), //more space between the two rows of stars
+            SizedBox(height: 50),
             Padding(
-              padding: const EdgeInsets.only(top: 50.0), // Add more space between the two rows of stars
+              padding: const EdgeInsets.only(top: 600.0),
               child: Row(
                 children: [
                   Spacer(),
                   InteractiveRatingWidget(
                     maxRating: 5,
-                    filledStar: Icons.star, // Use Icons.star directly
-                    unfilledStar: Icons.star_border, // Use Icons.star_border directly
+                    filledStar: Icons.star,
+                    unfilledStar: Icons.star_border,
                     onChanged: (rating) async {
                       print('Rating changed to $rating');
                       final failedattempt =
                       _firestore.collection("logs").doc(selectedgemcode);
                       failedattempt.set({
-                        'plink':selecedlink,
-                        'scanid':selectedgemcode,
+                        'plink': selecedlink,
+                        'scanid': selectedgemcode,
                         'starcount': rating,
-                      },SetOptions(merge: true));
+                      }, SetOptions(merge: true));
                     },
                   ),
                   Spacer(),
                 ],
               ),
-            )
-
-
-
-
-
+            ),
+            Positioned(
+              bottom: 220,
+              left: 135,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ViewPano(panolink: selecedlink)),
+                  );
+                },
+                child: Text('View Panorama'),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-
-
-
-
 
 }

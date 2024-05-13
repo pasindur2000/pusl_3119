@@ -73,72 +73,78 @@ class ResultPage extends StatelessWidget {
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white.withOpacity(0.9)),
                   ),
                   SizedBox(height: 20),
-                  FutureBuilder(
-                    future: fetchDiseaseInfo(label),
-                    builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
-                      } else if (snapshot.hasError) {
-                        return Text('Error: ${snapshot.error}');
-                      } else if (snapshot.hasData && snapshot.data!.exists) {
-                        Map<String, dynamic>? data = snapshot.data!.data() as Map<String, dynamic>?; // Cast to Map<String, dynamic>?
-                        if (data != null) {
-                          return Container(
-                            width: 350,
-                            height: 500,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.6),
-                              borderRadius: BorderRadius.circular(10), // Optional: for rounded corners
-                            ),
+                  if (label.isNotEmpty)
+                    FutureBuilder(
+                      future: fetchDiseaseInfo(label),
+                      builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text('Error fetching disease information: ${snapshot.error}');
+                        } else if (snapshot.hasData && snapshot.data!.exists) {
+                          Map<String, dynamic>? data = snapshot.data!.data() as Map<String, dynamic>?; // Cast to Map<String, dynamic>?
+                          if (data != null) {
+                            return Container(
+                              width: 350,
+                              height: 500,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.6),
+                                borderRadius: BorderRadius.circular(10), // Optional: for rounded corners
+                              ),
 
-                            child: Column(
-                              children: [
-                                SizedBox(height: 30),
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Text(
-                                    'Possible Causes:',
-                                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 30),
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text(
+                                      'Possible Causes:',
+                                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 5),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: Text(
-                                    data['possibleCauses'] ?? 'N/A',
-                                    style: TextStyle(fontSize: 25),
-                                    textAlign: TextAlign.center,
+                                  SizedBox(height: 5),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                    child: Text(
+                                      data['possibleCauses'] ?? 'N/A',
+                                      style: TextStyle(fontSize: 25),
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 20),
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Text(
-                                    'Possible Solution:',
-                                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                                  SizedBox(height: 20),
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text(
+                                      'Possible Solution:',
+                                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 5),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: Text(
-                                    data['possibleSolution'] ?? 'N/A',
-                                    style: TextStyle(fontSize: 25),
-                                    textAlign: TextAlign.center,
+                                  SizedBox(height: 5),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                    child: Text(
+                                      data['possibleSolution'] ?? 'N/A',
+                                      style: TextStyle(fontSize: 25),
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          );
+                                ],
+                              ),
+                            );
 
+                          } else {
+                            return Text('Disease information not found');
+                          }
                         } else {
                           return Text('Disease information not found');
                         }
-                      } else {
-                        return Text('Disease information not found');
-                      }
-                    },
-                  ),
+                      },
+                    ),
+                  if (label.isEmpty)
+                    Text(
+                      'Error fetching disease information',
+                      style: TextStyle(fontSize: 20, color: Colors.red),
+                    ),
                 ],
               ),
             ),

@@ -111,7 +111,7 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
         pnromaset.set({
           'scanid': scanid,
           'plink': downloadURL,
-          'startcount':0,
+          'starcount':0,
 
         });
 
@@ -272,8 +272,6 @@ class _PanoramaScreenState extends State<PanoramaScreen> {
               ),
             ),
           ),
-
-
         ],
       ),
     );

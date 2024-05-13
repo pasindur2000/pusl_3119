@@ -4,6 +4,7 @@ import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:developer' as devtools;
 import '../../../../constants.dart';
+import 'diseasep.dart';
 import 'result_page.dart';
 
 // Define colors
@@ -33,7 +34,7 @@ class _HomeLeavesState extends State<HomeLeaves> {
     );
   }
 
-  pickImageGallery()async{
+  pickImageGallery() async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
@@ -75,8 +76,62 @@ class _HomeLeavesState extends State<HomeLeaves> {
         ),
       ),
     );
-
   }
+
+  pickImageCamera() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.camera);
+
+    if (image == null) return;
+
+    var imageMap = File(image.path);
+
+    setState(() {
+      filePath = imageMap;
+    });
+
+    var recognitions = await Tflite.runModelOnImage(
+        path: image.path,
+        imageMean: 0.0,
+        imageStd: 255.0,
+        numResults: 2,
+        threshold: 0.2,
+        asynch: true
+    );
+
+    if (recognitions == null || recognitions.isEmpty) {
+      setState(() {
+        confidence = 0.0;
+        label = '';
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error fetching disease information'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      confidence = (recognitions[0]['confidence']*100);
+      label = recognitions[0]['label'].toString();
+    });
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DiseaseN( // Update to ResultPageUI
+          imageFile: imageMap,
+          label: label,
+        ),
+      ),
+    );
+  }
+
+
+
   @override
   void dispose() {
     super.dispose();
@@ -192,7 +247,7 @@ class _HomeLeavesState extends State<HomeLeaves> {
                     height: 8,
                   ),
                   ElevatedButton(
-                    onPressed: (){},
+                    onPressed: pickImageCamera, // Call pickImageCamera function when button is pressed
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white.withOpacity(0.6), // Change this value to adjust the opacity
                       minimumSize: const Size(200, 50), // Change these values to adjust the size
